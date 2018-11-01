@@ -2,3 +2,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/style.css'%}">
 <h1>WeHeart</h1>
 <p>The social network</p>
+<form class="site-form" action="{% url 'webapp:dashboard' %}" method="post">
+	{% csrf_token %}
+	<input type="text" name="username" id="username">
+	<input type="password" name="password", id="password">
+	<input type="submit" name="Iniciar Sesion">
+</form>
+<p>Not registered? <a href="{% url 'webapp:register'%}">Register now!</a></p>
