@@ -3,4 +3,5 @@ Meet people based on similarities with you.
 
 # Dependencies 
 
-django 2.1.2
+* python 3.7
+* django 2.1.2 
