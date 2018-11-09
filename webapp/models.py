@@ -1,16 +1,20 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 # Create your models here.
-class User(models.Model):
-	name = models.CharField(max_length = 20)
-	last_name = models.CharField(max_length = 20)
-	username = models.CharField(max_length = 30)
-	password = models.CharField(max_length = 100)
-	date_of_birth = models.DateField()
-	profile_picture = models.CharField(max_length = 200) #route  
-	cover_picture = models.CharField(max_length = 200) #route 
+class UserProfile(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	date_of_birth = models.DateField(null=True)
+	profile_picture = models.ImageField(upload_to='profile_picture',blank=True) #route  
+	cover_picture = models.ImageField(upload_to='cover_picture',blank=True) #route 
 	interests = models.CharField(max_length = 300)
 	biography = models.TextField()
 
 	def __str__(self):
-		return self.username
+		return self.user.username
+
+def create_profile(sender, **kwargs):
+	if kwargs['created']:
+		user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile,sender=User)

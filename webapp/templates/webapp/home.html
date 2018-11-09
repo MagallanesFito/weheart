@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% block body%}
+<div class="container">
+	<h1>weHeart</h1>
+	<p>Welcome to the application weHeart</p>
+	<form method="post">
+		{%csrf_token%}
+		{{form.as_p}}
+		<button type="submit" class="btn btn-default">Log in</button>
+	</form>
+	<p>Not registered yet? <a href="{% url 'webapp:register'%}">Register!</a></p>
+</div>
+{%endblock%}
