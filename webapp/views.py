@@ -26,3 +26,7 @@ def register(request):
 	return render(request,'webapp/register.html',args)
 def me(request):
 	return render(request,'webapp/me.html')
+def edit_profile(request):
+	return render(request,'webapp/edit_profile.html')
+def config_profile(request):
+	return render(request,'webapp/config_profile.html')

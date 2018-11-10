@@ -13,5 +13,7 @@ urlpatterns = [
 	path('logout',LogoutView.as_view(template_name='webapp/logout.html'),name="logout"),
 	path('register/',views.register,name="register"),
 	path('dashboard/',views.dashboard,name="dashboard"),
-	path('me/',views.me,name="me")
+	path('me/',views.me,name="me"),
+	path('edit/',views.edit_profile,name="edit_profile"),
+	path('config/',views.config_profile,name="config_profile"),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
