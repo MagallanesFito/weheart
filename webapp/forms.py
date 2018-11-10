@@ -4,8 +4,13 @@ from django.contrib.auth.models import User
 from django import forms
 
 class RegistrationForm(UserCreationForm):
-
 	email = forms.EmailField(required=True)
+	date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+	#profile_picture = forms.ImageField()
+	#cover_picture = forms.ImageField()
+	interests = forms.CharField()
+	biography = forms.CharField()
+
 	class Meta:
 		model = User
 		fields = (
@@ -13,14 +18,24 @@ class RegistrationForm(UserCreationForm):
 			'first_name',
 			'last_name',
 			'email',
-			'password1',
-			'password2'
+			'date_of_birth',
+			#'profile_picture',
+			#'cover_picture',
+			'interests',
+			'biography',
+			#'password1',
+			#'password2',
 			)
-	def save(self,commit=True):
+	'''def save(self,commit=True):
 		user = super(RegistrationForm,self).save(commit=False)
 		user.first_name = self.cleaned_data['first_name']
-		user.first_name = self.cleaned_data['last_name']
-		user.first_name = self.cleaned_data['email']
+		user.last_name = self.cleaned_data['last_name']
+		user.email = self.cleaned_data['email']
+		#user.refresh_from_db()
+		user.userprofile.date_of_birth = self.cleaned_data['date_of_birth']
+		#user.userprofile.interests = self.cleaned_data['date_of_birth']
+		#user.userprofile.biography = self.cleaned_data['date_of_birth']
 		if commit:
 			user.save()
-		return user
+		return user'''
+

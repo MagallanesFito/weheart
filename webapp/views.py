@@ -10,13 +10,19 @@ def dashboard(request):
 def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
-
 		if form.is_valid():
-			form.save()
+			user = form.save()
+			user.refresh_from_db()
+			user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
+			#user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
+			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
+			user.userprofile.interests = form.cleaned_data.get('interests')
+			user.userprofile.biography = form.cleaned_data.get('biography')
+			user.save()
 			return redirect('/webapp')
 	else:
 		form = RegistrationForm()
 		args = {'form':form}
-		return render(request,'webapp/register.html',args)
+	return render(request,'webapp/register.html',args)
 def me(request):
 	return render(request,'webapp/me.html')
