@@ -1,6 +1,16 @@
 #profile_avatar {
     border-radius: 50%;
 }
-#user_username{
+#user_username > a{
 	color: #a0a0a0;
+}
+#username_and_percentage h4,
+#username_and_percentage p{
+	display: inline;
+    vertical-align: top;
+    font-size: 16px;
+    line-height: 28px;
+}
+#percentage{
+	color: green;
 }

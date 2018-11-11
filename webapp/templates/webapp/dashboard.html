@@ -2,16 +2,19 @@
 {% load static%}
 {% block body%}
 <div class="container">
-	<h1>Dashboard</h1>
 	<h2>Recommended users</h2>
 	<div class="row">
-         {% for user in users %}
+         {% for user,percentage in similarities.items %}
           <div class="col-sm-3">
-            <img class="rounded-circle" src="{% static 'webapp/profile_example.jpg'%}" alt="Generic placeholder image" width="140" height="140">
+            <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{% static 'webapp/profile_example.jpg'%}" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
-            <h4 id="user_username">@{{user.username}}</h4>
+           <div id="username_and_percentage">
+            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
+            <p id="percentage">{{percentage}}% Similar</p>
+          </div>
             <p>{{user.userprofile.biography}}</p>
-            <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p>
+            <!-- CONSIDERAR QUITARLO O DEJARLO
+              <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
           </div><!-- /.col-lg-4 -->
          {% endfor %}
     </div>

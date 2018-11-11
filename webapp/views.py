@@ -2,13 +2,35 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
-# Create your views here.
-#def index(request):
-#	return render(request,'webapp/index.html')
-	#return render(request,'webapp/index.html')
+from random import randint
+
+
+''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
+Mas tarde se opta por una funcion mas sofisticada. Esta debe tomar las preferencias de
+un usuario, en forma de lista y compararlas con las preferencias del usuario logueado
+en este momento, para la funcion sera request.user. De esta forma, se tiene:  
+
+request.user : [informatics, pc, cs]  user: [plants,aeronautics]
+
+Se calcula una similitud entre 0 y 1: Algunas opciones son: 
+
+-entropia
+-coseno. 
+-word2vec
+
+Investigar mas a detalle esta funcion. 
+
+'''
+def calculate_similarity(request,user):
+	return randint(50,100)
+
 def dashboard(request):
 	users = User.objects.all()
-	return render(request,'webapp/dashboard.html',{'users':users})
+	#actualizar este codigo mas tarde
+	similarities = {}
+	for user in users:
+		similarities[user] = calculate_similarity(request,user)
+	return render(request,'webapp/dashboard.html',{'similarities' : similarities})
 def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST)
