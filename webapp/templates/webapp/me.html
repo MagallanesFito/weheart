@@ -2,7 +2,16 @@
 
 {% block body%}
 <div class="container">
-	<h1>My Profile</h1>
+		<h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
+	<h4 id="user_username">@{{user.username}}</h4>
+	<h4><strong>Biography:</strong></h4>
+	<p>{{user.userprofile.biography}}</p>
+	<h4><strong>Interests:</strong></h4>
+	<ul>
+		{% for interest in user_interests%}
+		<li><p>{{interest}}</p></li>
+		{% endfor%}
+	</ul>
 
 </div>
 {% endblock%}
