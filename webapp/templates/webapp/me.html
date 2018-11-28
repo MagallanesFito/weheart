@@ -1,7 +1,20 @@
 {% extends 'base.html'%}
-
+{% load static%}
 {% block body%}
 <div class="container">
+	<div class="row">
+		
+		{% if user.userprofile.profile_picture%}
+			<div class="col-md-4">
+			<img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="" width="140" height="140">
+			</div>
+		{% else %}
+		<div class="col-md-4">
+			<img class="rounded-circle" src="{% static 'webapp/profile_example.jpg'%}" alt="" width="140" height="140">
+		</div>
+		{% endif%}
+		
+		<div class="col-md-8">
 		<h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
 	<h4 id="user_username">@{{user.username}}</h4>
 	<h4><strong>Biography:</strong></h4>
@@ -12,6 +25,8 @@
 		<li><p>{{interest}}</p></li>
 		{% endfor%}
 	</ul>
-
+		</div>
+	</div>
+	
 </div>
 {% endblock%}

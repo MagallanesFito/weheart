@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
 from random import randint
-
+from django.contrib.auth.decorators import login_required
 
 ''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
 Mas tarde se opta por una funcion mas sofisticada. Esta debe tomar las preferencias de
@@ -23,7 +23,7 @@ Investigar mas a detalle esta funcion.
 '''
 def calculate_similarity(request,user):
 	return randint(50,100)
-
+@login_required
 def dashboard(request):
 	users = User.objects.all()
 	#actualizar este codigo mas tarde
@@ -38,7 +38,7 @@ def register(request):
 			user = form.save()
 			user.refresh_from_db()
 			user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
-			#user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
+			user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
 			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
 			user.userprofile.interests = form.cleaned_data.get('interests')
 			user.userprofile.biography = form.cleaned_data.get('biography')
@@ -46,16 +46,23 @@ def register(request):
 			return redirect('/webapp')
 	else:
 		form = RegistrationForm()
-		args = {'form':form}
+	args = {'form':form}
 	return render(request,'webapp/register.html',args)
+
+@login_required
 def me(request,username=None):
 	if username:
 		user = User.objects.get(username=username)
 	else:
 		user = request.user
 	separate_interests = user.userprofile.interests.replace(" ","").split(",")
-	return render(request,'webapp/me.html',{'user':user,'user_interests':separate_interests})
+	#profile_picture = user.userprofile.profile_picture.url.split('/')[-1]
+	args = {'user':user,
+	'user_interests':separate_interests,}
+	return render(request,'webapp/me.html',args)
+@login_required
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')
+@login_required
 def config_profile(request):
 	return render(request,'webapp/config_profile.html')

@@ -6,7 +6,7 @@ from django import forms
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required=True)
 	date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
-	#profile_picture = forms.ImageField()
+	profile_picture = forms.ImageField()
 	#cover_picture = forms.ImageField()
 	interests = forms.CharField()
 	biography = forms.CharField()
@@ -23,6 +23,7 @@ class RegistrationForm(UserCreationForm):
 			#'cover_picture',
 			'interests',
 			'biography',
+			'profile_picture',
 			#'password1',
 			#'password2',
 			)

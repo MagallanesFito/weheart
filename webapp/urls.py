@@ -4,8 +4,6 @@ from django.contrib.auth.views import (
 	LoginView,
 	LogoutView
 )
-from django.conf import settings
-from django.conf.urls.static import static
 
 app_name = 'webapp'
 urlpatterns = [
@@ -17,4 +15,4 @@ urlpatterns = [
 	path('me/<str:username>',views.me,name="me_with_username"),
 	path('edit/',views.edit_profile,name="edit_profile"),
 	path('config/',views.config_profile,name="config_profile"),
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]
