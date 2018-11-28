@@ -3,6 +3,8 @@ from webapp.models import UserProfile
 from django.contrib.auth.models import User
 from django import forms
 
+
+
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required=True)
 	date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
