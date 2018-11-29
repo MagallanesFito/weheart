@@ -6,20 +6,38 @@ from django.contrib.auth.forms import AuthenticationForm
 
 class LoginForm(AuthenticationForm):
 	username=forms.CharField(widget=forms.TextInput(attrs={
-		'class':'form-control username_form', 
+		'class':'form-control', 
 		'placeholder': 'Username',
 		}))
 	password=forms.CharField(widget=forms.PasswordInput(attrs={
-		'class':'form-control username_form',
+		'class':'form-control',
 		'placeholder': 'Password'
 		}))
 
 class RegistrationForm(UserCreationForm):
-	email = forms.EmailField(required=True)
+	username=forms.CharField(required=True,widget=forms.TextInput(attrs={
+		'class':'form-control', 
+		'placeholder': 'Username',
+		}))
+	email = forms.EmailField(required=True, widget=forms.TextInput(attrs={
+		'class':'form-control',
+		'placeholder':"Email"
+		}))
 	date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 	#profile_picture = forms.ImageField()
 	#cover_picture = forms.ImageField()
-	interests = forms.CharField()
+	interests = forms.CharField(widget=forms.TextInput(attrs={
+		'class':'form-control',
+		'placeholder':"Interests ex: Science,Life,Sports"
+		}))
+	password1=forms.CharField(widget=forms.PasswordInput(attrs={
+		'class':'form-control',
+		'placeholder': 'Password'
+		}))
+	password2=forms.CharField(widget=forms.PasswordInput(attrs={
+		'class':'form-control',
+		'placeholder': 'Repeat your password'
+		}))
 	biography = forms.CharField()
 
 	class Meta:
@@ -34,8 +52,8 @@ class RegistrationForm(UserCreationForm):
 			#'cover_picture',
 			'interests',
 			'biography',
-			#'password1',
-			#'password2',
+			'password1',
+			'password2',
 			)
 	'''def save(self,commit=True):
 		user = super(RegistrationForm,self).save(commit=False)

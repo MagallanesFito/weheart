@@ -25,9 +25,6 @@ body{
 /*input{
     border-radius: 4px;
 }*/
-.username_form{
-	/*border: 5px solid red;*/
-}
 </style>
 </head>
 
@@ -35,7 +32,7 @@ body{
 	<div class="container" id="parent">
 		<form method="post" class="form-signin" id="form_login">
 		<h1>weHeart</h1>
-		<h4>Please log in</h4>
+		<p>Meet people just like you</p>
 		{%csrf_token%}
 		<!--{{form.as_p}}-->
 		{{form.username}}<br>
