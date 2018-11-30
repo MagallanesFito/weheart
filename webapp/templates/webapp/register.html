@@ -5,16 +5,14 @@
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/style.css'%}">
 <style type="text/css">
 #parent{
-	margin-top: 100px;
+	margin-top: 75px;
 	width: 350px;
-	height: 500px;
+	height: 585px;
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 25px;
-	border-radius: 20px;
 }
 h2{
 	font-family: Helvetica;
-	color: white;
 }
 body{
 	background: url("{% static 'webapp/register_bg.jpg'%}") no-repeat center center fixed;
@@ -22,6 +20,14 @@ body{
 	-webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  color: white;
+}
+#file_text{
+	font-size: 15px;
+}
+#text_image{
+	font-size: 20px;
+	text-align: left;
 }
 /*input{
     border-radius: 4px;
@@ -31,32 +37,23 @@ body{
 
 <body class="text-center">
 <div class="container" id="parent">
-	<form method="post" class="form-signin" id="form_login">
-		<h2>Sign in</h2>
+	<form method="post" class="form-signin" id="form_login" enctype="multipart/form-data">
+		<h2>Sign Up</h2>
+		<p>Please fill out the following form</p>
 		{% csrf_token%}
 		{{form.username}}<br>
 		{{form.email}}<br>
 		{{form.interests}}<br>
+		<p id="text_image">Profile image</p>
+		<div class="custom-file">
+  			{{form.profile_picture}}
+  			<label class="custom-file-label" for="customFile" id="file_text">Select image</label>
+		</div>
+		<br><br>
 		{{form.password1}}<br>
-		{{form.password2}}<br><br>
+		{{form.password2}}<br>
 		<!--{{form.as_p}}-->
 		<button class="btn btn-md btn-success btn-block" type="submit">Sign up</button>
 	</form>
 </div>
 </body>
-
-<!-- 
-	fields = (
-			'username',
-			'first_name',
-			'last_name',
-			'email',
-			'date_of_birth',
-			#'profile_picture',
-			#'cover_picture',
-			'interests',
-			'biography',
-			#'password1',
-			#'password2',
-			)
--->

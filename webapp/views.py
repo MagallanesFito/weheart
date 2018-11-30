@@ -34,12 +34,15 @@ def dashboard(request):
 	return render(request,'webapp/dashboard.html',{'similarities' : similarities})
 def register(request):
 	if request.method == 'POST':
-		form = RegistrationForm(request.POST)
+		form = RegistrationForm(request.POST,request.FILES)
+		#print("*"*10)
+		#print(form.cleaned_data.get('profile_picture'))
+		#print("*"*10)
 		if form.is_valid():
 			user = form.save()
 			user.refresh_from_db()
 			#user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
-			#user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
+			user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
 			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
 			user.userprofile.interests = form.cleaned_data.get('interests')
 			#user.userprofile.biography = form.cleaned_data.get('biography')
@@ -48,7 +51,7 @@ def register(request):
 	else:
 		form = RegistrationForm()
 		args = {'form':form}
-	return render(request,'webapp/register.html',args)
+		return render(request,'webapp/register.html',args)
 def me(request,username=None):
 	if username:
 		user = User.objects.get(username=username)

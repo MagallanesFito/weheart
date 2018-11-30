@@ -24,7 +24,8 @@ class RegistrationForm(UserCreationForm):
 		'placeholder':"Email"
 		}))
 	#date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
-	#profile_picture = forms.ImageField()
+	profile_picture = forms.ImageField(required=False)
+	profile_picture.widget.attrs.update({'class': 'custom-file-input','id':'customFile'})
 	#cover_picture = forms.ImageField()
 	interests = forms.CharField(widget=forms.TextInput(attrs={
 		'class':'form-control',
@@ -42,19 +43,19 @@ class RegistrationForm(UserCreationForm):
 
 	class Meta:
 		model = User
-		fields = (
+		fields = [
 			'username',
 			#'first_name',
 			#'last_name',
 			'email',
 			#'date_of_birth',
-			#'profile_picture',
+			'profile_picture',
 			#'cover_picture',
 			'interests',
 			#'biography',
 			'password1',
 			'password2',
-			)
+			]
 	'''def save(self,commit=True):
 		user = super(RegistrationForm,self).save(commit=False)
 		user.first_name = self.cleaned_data['first_name']
