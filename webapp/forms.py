@@ -23,7 +23,7 @@ class RegistrationForm(UserCreationForm):
 		'class':'form-control',
 		'placeholder':"Email"
 		}))
-	date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+	#date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 	#profile_picture = forms.ImageField()
 	#cover_picture = forms.ImageField()
 	interests = forms.CharField(widget=forms.TextInput(attrs={
@@ -38,20 +38,20 @@ class RegistrationForm(UserCreationForm):
 		'class':'form-control',
 		'placeholder': 'Repeat your password'
 		}))
-	biography = forms.CharField()
+	#biography = forms.CharField()
 
 	class Meta:
 		model = User
 		fields = (
 			'username',
-			'first_name',
-			'last_name',
+			#'first_name',
+			#'last_name',
 			'email',
-			'date_of_birth',
+			#'date_of_birth',
 			#'profile_picture',
 			#'cover_picture',
 			'interests',
-			'biography',
+			#'biography',
 			'password1',
 			'password2',
 			)

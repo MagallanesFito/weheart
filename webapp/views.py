@@ -29,7 +29,8 @@ def dashboard(request):
 	#actualizar este codigo mas tarde
 	similarities = {}
 	for user in users:
-		similarities[user] = calculate_similarity(request,user)
+		if user != request.user:
+			similarities[user] = calculate_similarity(request,user)
 	return render(request,'webapp/dashboard.html',{'similarities' : similarities})
 def register(request):
 	if request.method == 'POST':
@@ -37,11 +38,11 @@ def register(request):
 		if form.is_valid():
 			user = form.save()
 			user.refresh_from_db()
-			user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
+			#user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
 			#user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
 			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
 			user.userprofile.interests = form.cleaned_data.get('interests')
-			user.userprofile.biography = form.cleaned_data.get('biography')
+			#user.userprofile.biography = form.cleaned_data.get('biography')
 			user.save()
 			return redirect('/webapp')
 	else:
