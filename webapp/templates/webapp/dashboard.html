@@ -6,10 +6,7 @@
 	<div class="row">
          {% for user,percentage in similarities.items %}
           <div class="col-sm-3">
-           <!-- <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>-->
-           
-            <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{% static 'webapp/profile_example.jpg'%}" alt="Generic placeholder image" width="140" height="140"></a>
-           
+            <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
            <div id="username_and_percentage">
             <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
