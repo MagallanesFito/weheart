@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
 from random import randint
-from django.contrib.auth.decorators import login_required
+
 
 ''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
 Mas tarde se opta por una funcion mas sofisticada. Esta debe tomar las preferencias de
@@ -23,7 +23,7 @@ Investigar mas a detalle esta funcion.
 '''
 def calculate_similarity(request,user):
 	return randint(50,100)
-@login_required
+
 def dashboard(request):
 	users = User.objects.all()
 	#actualizar este codigo mas tarde
@@ -58,13 +58,8 @@ def me(request,username=None):
 	else:
 		user = request.user
 	separate_interests = user.userprofile.interests.replace(" ","").split(",")
-	#profile_picture = user.userprofile.profile_picture.url.split('/')[-1]
-	args = {'user':user,
-	'user_interests':separate_interests,}
-	return render(request,'webapp/me.html',args)
-@login_required
+	return render(request,'webapp/me.html',{'user':user,'user_interests':separate_interests})
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')
-@login_required
 def config_profile(request):
 	return render(request,'webapp/config_profile.html')

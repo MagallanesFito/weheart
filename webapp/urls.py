@@ -6,7 +6,6 @@ from django.contrib.auth.views import (
 )
 from webapp.forms import LoginForm
 
-
 app_name = 'webapp'
 urlpatterns = [
 	path('',LoginView.as_view(template_name='webapp/home.html',authentication_form=LoginForm),name="home"), #index incluye el formulario de log in
