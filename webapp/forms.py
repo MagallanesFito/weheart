@@ -49,11 +49,7 @@ class RegistrationForm(UserCreationForm):
 			#'last_name',
 			'email',
 			#'date_of_birth',
-<<<<<<< HEAD
-			#'profile_picture',
-=======
 			'profile_picture',
->>>>>>> new_feature
 			#'cover_picture',
 			'interests',
 			#'biography',
