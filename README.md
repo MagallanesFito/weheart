@@ -11,10 +11,10 @@ Meet people based on similarities with you.
 Login & register page:
 
 ![Login screen](login.png)
-[Background Source]("https://www.freepik.es/fotos-vectores-gratis/musica")
+Image Source "https://www.freepik.es/fotos-vectores-gratis/musica"
 
 ![Register screen](register.png)
-[Background Source]("https://www.freepik.es/fotos-vectores-gratis/musica")
+Image Soruce "https://www.freepik.es/fotos-vectores-gratis/fondo"
 
 Dashboard (not finished):
 ![Login screen](dashboard.png)
