@@ -63,6 +63,10 @@ body{
 #btn_submit{
 	margin-top: 25px;
 }
+.form-check{
+	margin-top: 15px;
+	text-align: left;
+}
 
 /*input{
     border-radius: 4px;
@@ -110,15 +114,16 @@ body{
 				<div class="custom-file">
 		  			{{form.profile_picture}}
 		  			<label class="custom-file-label" for="customFile" id="file_text">Profile image</label>
-				</div><br><br>
-				<!--<div class="custom-file">
-		  			{{form.cover_picture}}
-		  			<label class="custom-file-label" for="coverPicture" id="file_text">Cover image</label>
-				</div>-->
-				
+				</div>
 				<br><br>
 				{{form.password1}}<br>
 				{{form.password2}}<br>
+				<div class="form-check">
+				  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+				  <label class="form-check-label" for="defaultCheck1">
+				    I've read the <a href="#">terms and conditions</a> of this website
+				  </label>
+				</div>
 				<button class="btn btn-md btn-success btn-block" id="btn_submit" type="submit">Sign up</button>
 			</div>
 		</div>
