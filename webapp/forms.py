@@ -29,7 +29,8 @@ class RegistrationForm(UserCreationForm):
 	#cover_picture = forms.ImageField()
 	interests = forms.CharField(widget=forms.TextInput(attrs={
 		'class':'form-control',
-		'placeholder':"Interests ex: Science,Life,Sports"
+		'placeholder':"Interests ex: Science,Life,Sports",
+		'id' : 'interests_text'
 		}))
 	password1=forms.CharField(widget=forms.PasswordInput(attrs={
 		'class':'form-control',

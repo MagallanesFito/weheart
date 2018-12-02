@@ -6,7 +6,7 @@
 <style type="text/css">
 #parent{
 	margin-top: 30px;
-	width: 350px;
+	width: 750px;
 	height: 585px;
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 25px;
@@ -29,31 +29,115 @@ body{
 	font-size: 20px;
 	text-align: left;
 }
+.partial_badge{
+	display: inline;
+	float: left;
+	margin: 5px;
+}
+.close_icon{
+	cursor: pointer;
+}
+#container_badges{
+	height: 150px;
+}
+#seleccionador{
+	border-radius: 0px;
+}
+#signup{
+	width: 350px;
+	margin-left: 25%;
+	margin-top: 100px;
+}
+#botonAdd{
+	float: right;
+	width: 60px;
+	border-radius: 0px;
+	/*background-color: #545b62;*/
+}
+.form-control{
+	border-radius: 0px;
+}
+#interests_text{
+	display: none;
+}
+
 /*input{
     border-radius: 4px;
 }*/
+
 </style>
 </head>
 
 <body class="text-center">
 <div class="container" id="parent">
 	<form method="post" class="form-signin" id="form_login" enctype="multipart/form-data">
-		<h2>Sign Up</h2>
-		<p>Please fill out the following form</p>
-		{% csrf_token%}
-		{{form.username}}<br>
-		{{form.email}}<br>
-		{{form.interests}}<br>
-		<p id="text_image">Profile image</p>
-		<div class="custom-file">
-  			{{form.profile_picture}}
-  			<label class="custom-file-label" for="customFile" id="file_text">Select image</label>
+		<div class="row">
+			<div class="col">
+				<h2>Sign Up</h2>
+			<p>Please fill out the following form</p>
+			{% csrf_token%}
+			</div>
 		</div>
-		<br><br>
-		{{form.password1}}<br>
-		{{form.password2}}<br>
+		<div class="row">
+			<div class="col">
+				{{form.username}}<br>
+				{{form.email}}<br>
+		   <div>
+		   	{{form.interests}}
+			<div id="container_badges" class="form-control">		
+			</div>
+		</div>
+		 <div class="row" id="selector">
+		 	 <div class="col-md-10">
+		 	 	<select class="custom-select" id="seleccionador">
+			  <option value="" selected disabled hidden>Add some interests</option>
+			  <option value="1">Animals</option>
+			  <option value="2">Travelling</option>
+			  <option value="3">Hiking</option>
+			  <option value="3">Love</option>
+			</select>
+		 	 </div>
+		 <div class="col-md-2">
+		 	 <a class="btn btn-danger" id="botonAdd" role="button">Add</a>
+		 </div>
+		 </div>
+		
+			</div>
+			<div class="col">
+				<div class="custom-file">
+		  			{{form.profile_picture}}
+		  			<label class="custom-file-label" for="customFile" id="file_text">Profile image</label>
+				</div>
+				
+				<br><br>
+				{{form.password1}}<br>
+				{{form.password2}}<br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div id="signup">
+					<button class="btn btn-md btn-success btn-block" type="submit">Sign up</button>
+				</div>
+			</div>
+		</div>
 		<!--{{form.as_p}}-->
-		<button class="btn btn-md btn-success btn-block" type="submit">Sign up</button>
 	</form>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(document).on('click', '.close_icon', function () {
+    	$(this).parent().remove();
+	});
+	$( "#botonAdd" ).click(function() {
+		//Agregar badges
+  		//$('#interests_text').val($('#interests_text').val() + 'more text');
+  		var interest = $( "#seleccionador option:selected" ).text();
+
+  		$('#interests_text').val($('#interests_text').val() + interest +',');
+  		var html_insert2 = "<span class='badge badge-primary partial_badge'>"+interest +" "+ "<span class='close_icon'>x</span></span>";
+  		var html_insert = "<span class='badge badge-success partial_badge'>"+interest+" "+"<a role='button' class='close_icon'>x</a></span>";
+  		$( "#container_badges" ).before(html_insert2);
+	});
+</script>
 </body>
