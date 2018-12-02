@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
 from random import randint
+from webapp.models import Interest
 
 
 ''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
@@ -50,14 +51,18 @@ def register(request):
 			return redirect('/webapp')
 	else:
 		form = RegistrationForm()
-		args = {'form':form}
+		query = Interest.objects.all()
+		list_interests = []
+		for element in query:
+			list_interests.append(element.name)
+		args = {'form':form,'list_interests':list_interests}
 		return render(request,'webapp/register.html',args)
 def me(request,username=None):
 	if username:
 		user = User.objects.get(username=username)
 	else:
 		user = request.user
-	separate_interests = user.userprofile.interests.replace(" ","").split(",")
+	separate_interests = user.userprofile.interests.split(",")[:-1]
 	return render(request,'webapp/me.html',{'user':user,'user_interests':separate_interests})
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')

@@ -97,11 +97,10 @@ body{
 		 <div class="row" id="selector">
 		 	 <div class="col-md-10">
 		 	 	<select class="custom-select" id="seleccionador">
-			  <option value="" selected disabled hidden>Add some interests</option>
-			  <option value="1">Animals</option>
-			  <option value="2">Travelling</option>
-			  <option value="3">Hiking</option>
-			  <option value="3">Love</option>
+			  <option value="" selected disabled hidden>Add some hobbies</option>
+			  {% for option in list_interests%}
+			  	<option value="2">{{option}}</option>
+			  {% endfor%}
 			</select>
 		 	 </div>
 		 <div class="col-md-2">
@@ -132,18 +131,38 @@ body{
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript">
+	//QUIT THIS HARDCONDING
+	var list_interests = [];
 	$(document).on('click', '.close_icon', function () {
+		var texto = $(this).parent().text();
+		var elemento = texto.substring(0,texto.length-2);
+		var index = list_interests.indexOf(elemento);
+		if(index > -1){
+			list_interests.splice(index,1);
+		}
     	$(this).parent().remove();
 	});
 	$( "#botonAdd" ).click(function() {
 		//Agregar badges
   		//$('#interests_text').val($('#interests_text').val() + 'more text');
   		var interest = $( "#seleccionador option:selected" ).text();
+  		interest = interest.substring(0,interest.length);
 
-  		$('#interests_text').val($('#interests_text').val() + interest +',');
+  		var index = list_interests.indexOf(interest);
+		if(index > -1){
+			//Manejar un error dinamico
+			return;
+		}
+  		list_interests.push(interest);
+  		//$('#interests_text').val($('#interests_text').val() + interest +',');
   		var html_insert2 = "<span class='badge badge-primary partial_badge'>"+interest +" "+ "<span class='close_icon'>x</span></span>";
-  		var html_insert = "<span class='badge badge-success partial_badge'>"+interest+" "+"<a role='button' class='close_icon'>x</a></span>";
   		$( "#container_badges" ).before(html_insert2);
+	});
+	$( "#btn_submit" ).click(function( ) {
+		for(var i=0;i<list_interests.length;i++){
+			$('#interests_text').val($('#interests_text').val() + list_interests[i] +',');
+		}
+		$("#form_login").submit();
 	});
 </script>
 </body>
