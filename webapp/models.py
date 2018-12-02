@@ -7,8 +7,9 @@ from PIL import Image
 class UserProfile(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	date_of_birth = models.DateField(null=True)
-	profile_picture = models.ImageField(default="default.jpg",upload_to='profile_picture') #route  
-	#cover_picture = models.ImageField(upload_to='cover_picture',blank=True) #route 
+	profile_picture = models.ImageField(default="default.jpg",upload_to='profile_picture',blank=True) #route  
+	
+	#cover_picture = models.ImageField(default="default_cover.png",upload_to='cover_picture') #route 
 	interests = models.CharField(max_length = 300)
 	biography = models.TextField(default="Hey there, I'm using weHeart to make some friends!")
 

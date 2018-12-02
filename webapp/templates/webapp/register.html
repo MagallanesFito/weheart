@@ -5,9 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{% static 'webapp/style.css'%}">
 <style type="text/css">
 #parent{
-	margin-top: 30px;
+	margin-top: 100px;
 	width: 750px;
-	height: 585px;
+	height: 450px;
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 25px;
 }
@@ -60,6 +60,9 @@ body{
 #interests_text{
 	display: none;
 }
+#btn_submit{
+	margin-top: 25px;
+}
 
 /*input{
     border-radius: 4px;
@@ -107,18 +110,16 @@ body{
 				<div class="custom-file">
 		  			{{form.profile_picture}}
 		  			<label class="custom-file-label" for="customFile" id="file_text">Profile image</label>
-				</div>
+				</div><br><br>
+				<!--<div class="custom-file">
+		  			{{form.cover_picture}}
+		  			<label class="custom-file-label" for="coverPicture" id="file_text">Cover image</label>
+				</div>-->
 				
 				<br><br>
 				{{form.password1}}<br>
 				{{form.password2}}<br>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
-				<div id="signup">
-					<button class="btn btn-md btn-success btn-block" type="submit">Sign up</button>
-				</div>
+				<button class="btn btn-md btn-success btn-block" id="btn_submit" type="submit">Sign up</button>
 			</div>
 		</div>
 		<!--{{form.as_p}}-->

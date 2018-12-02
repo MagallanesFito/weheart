@@ -26,7 +26,8 @@ class RegistrationForm(UserCreationForm):
 	#date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 	profile_picture = forms.ImageField(required=False)
 	profile_picture.widget.attrs.update({'class': 'custom-file-input','id':'customFile'})
-	#cover_picture = forms.ImageField()
+	#cover_picture = forms.ImageField(required=False)
+	#cover_picture.widget.attrs.update({'class': 'custom-file-input','id':'coverPicture'})
 	interests = forms.CharField(widget=forms.TextInput(attrs={
 		'class':'form-control',
 		'placeholder':"Interests ex: Science,Life,Sports",
