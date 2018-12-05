@@ -67,6 +67,9 @@ body{
 	margin-top: 15px;
 	text-align: left;
 }
+#biography_area{
+	height: 60px;
+}
 
 /*input{
     border-radius: 4px;
@@ -117,12 +120,13 @@ body{
 				<br><br>
 				{{form.password1}}<br>
 				{{form.password2}}<br>
-				<div class="form-check">
+				<!--<div class="form-check">
 				  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
 				  <label class="form-check-label" for="defaultCheck1">
 				    I've read the <a href="#">terms and conditions</a> of this website
 				  </label>
-				</div>
+				</div>-->
+				  {{form.biography}}
 				<button class="btn btn-md btn-success btn-block" id="btn_submit" type="submit">Sign up</button>
 			</div>
 		</div>
@@ -158,11 +162,17 @@ body{
   		var html_insert2 = "<span class='badge badge-primary partial_badge'>"+interest +" "+ "<span class='close_icon'>x</span></span>";
   		$( "#container_badges" ).before(html_insert2);
 	});
+	function Empty(){
+		return ($("#username")=="" && $("password1") == "");
+	}
 	$( "#btn_submit" ).click(function( ) {
 		for(var i=0;i<list_interests.length;i++){
 			$('#interests_text').val($('#interests_text').val() + list_interests[i] +',');
 		}
-		$("#form_login").submit();
+		//eliminate this hardcoded line
+		if(!Empy()){
+			$("#form_login").submit();
+		}
 	});
 </script>
 </body>

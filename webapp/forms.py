@@ -41,7 +41,11 @@ class RegistrationForm(UserCreationForm):
 		'class':'form-control',
 		'placeholder': 'Repeat your password'
 		}))
-	#biography = forms.CharField()
+	biography = forms.CharField(required=False,widget=forms.TextInput(attrs={
+			'class':'form-control',
+			'id' : 'biography_area',
+			'placeholder':"Write a short biography about you"
+			}))
 
 	class Meta:
 		model = User
@@ -54,7 +58,7 @@ class RegistrationForm(UserCreationForm):
 			'profile_picture',
 			#'cover_picture',
 			'interests',
-			#'biography',
+			'biography',
 			'password1',
 			'password2',
 			]
