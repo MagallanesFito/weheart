@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
-from random import randint
+import random
 from webapp.models import Interest
 import requests
 import json
@@ -35,7 +35,7 @@ def jaccard_similarity(actual_user,user):
 	return float("{0:.2f}".format(similarity)) 
 	#return randint(50,100)
 def semantic_similarity(actual_user,user):
-	token = ""
+	'''token = ""
 	url = "https://api.dandelion.eu/datatxt/sim/v1/"
 	texto1 = actual_user.userprofile.biography
 	texto2 = user.userprofile.biography
@@ -43,7 +43,8 @@ def semantic_similarity(actual_user,user):
 	dict_data = json.dumps(dict_data)
 	loaded_r = json.loads(dict_data)
 	r = requests.post(url, data=loaded_r)
-	return (r.json()['similarity'])
+	return (r.json()['similarity'])'''
+	return random.uniform(0.5, 1)
 def calculate_similarity(actual_user,user):
 	
 	result_semantic = semantic_similarity(actual_user,user)
@@ -55,14 +56,15 @@ def calculate_similarity(actual_user,user):
 	
 
 def dashboard(request):
-	users = User.objects.all()
+	#users = User.objects.all()
+	users = User.objects.exclude(pk=request.user.pk)
 	#actualizar este codigo mas tarde
 	similarities = {}
 	actual_user = request.user
 	#La consulta debe ser excluyendo el usuario actual
 	for user in users:
-		if user != request.user:
-			similarities[user] = calculate_similarity(actual_user,user)
+		#if user != request.user:
+		similarities[user] = calculate_similarity(actual_user,user)
 	ordenado = dict(sorted(similarities.items(),key=lambda kv : kv[1],reverse=True))
 	return render(request,'webapp/dashboard.html',{'similarities' : ordenado})
 def register(request):
