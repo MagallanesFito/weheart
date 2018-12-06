@@ -23,7 +23,14 @@ Investigar mas a detalle esta funcion.
 
 '''
 def calculate_similarity(request,user):
-	return randint(50,100)
+	'''similitud de jacard'''
+	request_user_list = request.user.userprofile.interests.split(",")[:-1]
+	user_list = user.userprofile.interests.split(",")[:-1]
+	set_request = set(request_user_list)
+	set_user = set(user_list)
+	similarity = (len(set_request & set_user)/len(set_user | set_request))
+	return float("{0:.2f}".format(similarity)) 
+	#return randint(50,100)
 
 def dashboard(request):
 	users = User.objects.all()
@@ -32,7 +39,8 @@ def dashboard(request):
 	for user in users:
 		if user != request.user:
 			similarities[user] = calculate_similarity(request,user)
-	return render(request,'webapp/dashboard.html',{'similarities' : similarities})
+	ordenado = dict(sorted(similarities.items(),key=lambda kv : kv[1],reverse=True))
+	return render(request,'webapp/dashboard.html',{'similarities' : ordenado})
 def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST,request.FILES)
