@@ -28,7 +28,7 @@ def calculate_similarity(request,user):
 	user_list = user.userprofile.interests.split(",")[:-1]
 	set_request = set(request_user_list)
 	set_user = set(user_list)
-	similarity = (len(set_request & set_user)/len(set_user | set_request))
+	similarity = (len(set_request & set_user)/len(set_user | set_request))*100
 	return float("{0:.2f}".format(similarity)) 
 	#return randint(50,100)
 
