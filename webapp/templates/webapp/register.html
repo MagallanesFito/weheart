@@ -58,7 +58,7 @@ body{
 	border-radius: 0px;
 }
 #interests_text{
-	display: none;
+	/*display: none;*/
 }
 #btn_submit{
 	margin-top: 25px;
@@ -137,6 +137,12 @@ body{
 <script type="text/javascript">
 	//QUIT THIS HARDCONDING
 	var list_interests = [];
+	function modifyList(){
+		$("#interests_text").val("");
+		for(var i=0;i<list_interests.length;i++){
+			$('#interests_text').val($('#interests_text').val() + list_interests[i] +',');
+		}
+	}
 	$(document).on('click', '.close_icon', function () {
 		var texto = $(this).parent().text();
 		var elemento = texto.substring(0,texto.length-2);
@@ -145,6 +151,7 @@ body{
 			list_interests.splice(index,1);
 		}
     	$(this).parent().remove();
+    	modifyList();
 	});
 	$( "#botonAdd" ).click(function() {
 		//Agregar badges
@@ -161,8 +168,9 @@ body{
   		//$('#interests_text').val($('#interests_text').val() + interest +',');
   		var html_insert2 = "<span class='badge badge-primary partial_badge'>"+interest +" "+ "<span class='close_icon'>x</span></span>";
   		$( "#container_badges" ).before(html_insert2);
+  		modifyList();
 	});
-	function Empty(){
+	/*function Empty(){
 		return ($("#username")=="" && $("password1") == "");
 	}
 	$( "#btn_submit" ).click(function( ) {
@@ -173,6 +181,6 @@ body{
 		if(!Empy()){
 			$("#form_login").submit();
 		}
-	});
+	});*/
 </script>
 </body>
