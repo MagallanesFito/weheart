@@ -4,6 +4,8 @@ from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
 from random import randint
 from webapp.models import Interest
+import requests
+import json
 
 
 ''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
@@ -22,23 +24,45 @@ Se calcula una similitud entre 0 y 1: Algunas opciones son:
 Investigar mas a detalle esta funcion. 
 
 '''
-def calculate_similarity(request,user):
-	'''similitud de jacard'''
-	request_user_list = request.user.userprofile.interests.split(",")[:-1]
+def jaccard_similarity(actual_user,user):
+	#Similitud de Jaccard
+	request_user_list = actual_user.userprofile.interests.split(",")[:-1]
 	user_list = user.userprofile.interests.split(",")[:-1]
 	set_request = set(request_user_list)
 	set_user = set(user_list)
-	similarity = (len(set_request & set_user)/len(set_user | set_request))*100
+	similarity = (len(set_request & set_user)/len(set_user | set_request))
+	return similarity
 	return float("{0:.2f}".format(similarity)) 
 	#return randint(50,100)
+def semantic_similarity(actual_user,user):
+	token = ""
+	url = "https://api.dandelion.eu/datatxt/sim/v1/"
+	texto1 = actual_user.userprofile.biography
+	texto2 = user.userprofile.biography
+	dict_data = {"text1": texto1, "text2" : texto2,"lang" : "en", "token" : token}
+	dict_data = json.dumps(dict_data)
+	loaded_r = json.loads(dict_data)
+	r = requests.post(url, data=loaded_r)
+	return (r.json()['similarity'])
+def calculate_similarity(actual_user,user):
+	
+	result_semantic = semantic_similarity(actual_user,user)
+	result_jaccard = jaccard_similarity(actual_user,user)
+	#Se da menor importancia a jaccard que a semantico,
+	#revisar esta metrica para despues
+	resultado = (0.3*result_jaccard+0.7*result_semantic)*100
+	return float("{0:.2f}".format(resultado))  
+	
 
 def dashboard(request):
 	users = User.objects.all()
 	#actualizar este codigo mas tarde
 	similarities = {}
+	actual_user = request.user
+	#La consulta debe ser excluyendo el usuario actual
 	for user in users:
 		if user != request.user:
-			similarities[user] = calculate_similarity(request,user)
+			similarities[user] = calculate_similarity(actual_user,user)
 	ordenado = dict(sorted(similarities.items(),key=lambda kv : kv[1],reverse=True))
 	return render(request,'webapp/dashboard.html',{'similarities' : ordenado})
 def register(request):
