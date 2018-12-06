@@ -42,7 +42,7 @@ class RegistrationForm(UserCreationForm):
 		'placeholder': 'Repeat your password'
 		}))
 	#biography = forms.CharField(required=False)
-	biography = forms.CharField(widget=forms.TextInput(attrs={
+	biography = forms.CharField(required=False,widget=forms.TextInput(attrs={
 			'class':'form-control',
 			'id' : 'biography_area',
 			'placeholder':"Write a short biography about you"

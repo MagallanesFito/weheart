@@ -11,7 +11,7 @@ class UserProfile(models.Model):
 	
 	#cover_picture = models.ImageField(default="default_cover.png",upload_to='cover_picture') #route 
 	interests = models.CharField(max_length = 1000)
-	biography = models.CharField(max_length=1000,null=True)
+	biography = models.TextField()
 
 	def __str__(self):
 		return self.user.username

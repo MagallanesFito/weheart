@@ -47,7 +47,8 @@ def register(request):
 			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
 			user.userprofile.interests = form.cleaned_data.get('interests')
 			user.userprofile.biography = form.cleaned_data.get('biography')
-			
+			if user.userprofile.biography == "":
+				user.userprofile.biography = "Hey there, I'm using weHeart to make some friends"
 			user.save()
 			return redirect('/webapp')
 	else:
