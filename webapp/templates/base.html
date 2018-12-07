@@ -9,7 +9,7 @@
 	{% endblock%}
 </head>
 <body>
-	 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3a3b3d;">
       <div class="container">
         {% if user.is_authenticated%}
         <a class="navbar-brand" href="{% url 'webapp:dashboard'%}" onMouseOver="this.style.color='#d11b2d'" onMouseOut="this.style.color='white'" style="font-size: 25px;">weHeart</a>

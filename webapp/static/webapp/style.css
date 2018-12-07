@@ -1,9 +1,7 @@
 #profile_avatar {
     border-radius: 50%;
 }
-#user_username > a{
-	color: #a0a0a0;
-}
+
 #username_and_percentage h4,
 #username_and_percentage p{
 	display: inline;

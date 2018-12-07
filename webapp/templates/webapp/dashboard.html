@@ -8,9 +8,13 @@
     .avatar_profile{
       /*height: 400px;*/
       text-align: center;
-      border-radius: 0px;
-      background-color: #192530;
+      border-radius: 3px;
+      /*background-color: #dbdbdb;*/
+      background-color: #c9c7c7;
+      color: #2b2c2d;
       position: relative;
+      margin: 0px;
+      border: 0px;
     }
     .avatar_content{
       position: relative;
@@ -18,8 +22,9 @@
       transform: translateY(-50%);
     }
     body{
-      background-color: #3a4b5b;
-      color: white;
+      /*background-color: #3a4b5b;*/
+      background-color: #e5e6e8;
+      color: #2b2c2d;
       /*font-family: Open-Sans;*/
       font-family: Helvetica;
     }
@@ -51,6 +56,7 @@
       opacity: 0;
       transition: .5s ease;
       background-color: rgba(0, 0, 0, 0.75);
+      border: 1px solid white;
     }
     .avatar_profile:hover .overlay{
       opacity: 1;
@@ -59,11 +65,15 @@
       font-size: 30px;
       color: white;
     }
+    .corazon:link{
+      text-decoration: none;
+    }
     .corazon:hover{
       font-size: 45px;
       color: #d11b2d;
       transition: .5s ease;
     }
+    
   </style>
 </head>
 {%endblock%}
@@ -81,20 +91,22 @@
               <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
            <div id="username_and_percentage">
-            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}:</a></h4>
+            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}" style="color: #124b84;">@{{user.username}}:</a></h4>
             <p id="percentage"><strong>{{percentage}}%</strong> Similar</p>
           </div>
             <!-- CONSIDERAR QUITARLO O DEJARLO
               <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
       </div>
-      <a href="{% url 'webapp:me_with_username' username=user.username %}">
+      <!--<a href="{% url 'webapp:me_with_username' username=user.username %}">-->
         <div class="overlay">
               <div class="biography">
                 <p>{{user.userprofile.biography}}</p>
-               <p class="corazon">&#10084;</p>
+               <div>
+                 <a class="corazon" href="#">&#10084;</a>
+               </div>
               </div>
       </div>
-      </a>
+      
     </div>
     
     {%endfor%}
@@ -138,6 +150,17 @@
   });
   $(".corazon").click(function(){
     alert("added to favorie");
+  });
+  $(".overlay").each(function(index){
+    randomRed = (Math.floor(Math.random() * 255));
+    randomGreen = (Math.floor(Math.random() * 255));
+    randomBlue = (Math.floor(Math.random() * 255));
+    console.log(randomRed);
+    console.log(randomGreen);
+    console.log(randomBlue);
+    console.log("------------");
+    var atribute = "rgba("+randomRed.toString()+","+randomGreen.toString()+","+randomBlue.toString()+",0.8)";
+    $(this).css('background-color',atribute);
   });
 </script>
 {% endblock%}
