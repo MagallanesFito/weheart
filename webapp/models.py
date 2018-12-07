@@ -9,9 +9,9 @@ class UserProfile(models.Model):
 	date_of_birth = models.DateField(null=True)
 	profile_picture = models.ImageField(default="default.jpg",upload_to='profile_picture',blank=True) #route  
 	
-	#cover_picture = models.ImageField(default="default_cover.png",upload_to='cover_picture') #route 
+	cover_picture = models.ImageField(default="default.png",upload_to='profile_picture',blank=True) #route 
 	interests = models.CharField(max_length = 1000)
-	biography = models.TextField()
+	biography = models.TextField(max_length=130)
 
 	def __str__(self):
 		return self.user.username

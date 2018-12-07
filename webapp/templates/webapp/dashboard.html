@@ -33,7 +33,7 @@
       display: none;
     }
     .rounded-circle{
-      border: 1px solid black;
+      border: 2px solid white;
     }
     .biography{
        color: white;
@@ -107,7 +107,7 @@
     {% for user,percentage in similarities.items %}
       <div class="card avatar_profile">
         <div class="background_container">
-          <img class="cover_picture" src="{% static 'webapp/register_bg.jpg'%}">
+          <img class="cover_picture" src="{{user.userprofile.cover_picture.url}}">
         </div>
       <div class="avatar_content">
        

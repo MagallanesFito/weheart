@@ -78,7 +78,7 @@ def register(request):
 			user.refresh_from_db()
 			#user.userprofile.date_of_birth = form.cleaned_data.get('date_of_birth')
 			user.userprofile.profile_picture = form.cleaned_data.get('profile_picture')
-			#user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
+			user.userprofile.cover_picture = form.cleaned_data.get('cover_picture')
 			user.userprofile.interests = form.cleaned_data.get('interests')
 			user.userprofile.biography = form.cleaned_data.get('biography')
 			if user.userprofile.biography == "":

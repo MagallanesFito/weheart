@@ -7,7 +7,7 @@
 #parent{
 	margin-top: 100px;
 	width: 750px;
-	height: 450px;
+	height: 530px;
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 25px;
 }
@@ -70,6 +70,9 @@ body{
 #biography_area{
 	height: 60px;
 }
+#counter{
+	text-align: right;
+}
 
 /*input{
     border-radius: 4px;
@@ -118,6 +121,11 @@ body{
 		  			<label class="custom-file-label" for="customFile" id="file_text">Profile image</label>
 				</div>
 				<br><br>
+				<div class="custom-file">
+		  			{{form.cover_picture}}
+		  			<label class="custom-file-label" for="customCover" id="file_text">Cover image</label>
+				</div>
+				<br><br>
 				{{form.password1}}<br>
 				{{form.password2}}<br>
 				<!--<div class="form-check">
@@ -127,6 +135,7 @@ body{
 				  </label>
 				</div>-->
 				  {{form.biography}}
+				  <p id="counter">130 Characters Left</p>
 				<button class="btn btn-md btn-success btn-block" id="btn_submit" type="submit">Sign up</button>
 			</div>
 		</div>
@@ -169,6 +178,16 @@ body{
   		var html_insert2 = "<span class='badge badge-primary partial_badge'>"+interest +" "+ "<span class='close_icon'>x</span></span>";
   		$( "#container_badges" ).before(html_insert2);
   		modifyList();
+	});
+	$('#biography_area').keyup(function () {
+	  var max = 130;
+	  var len = $(this).val().length;
+	  if (len >= max) {
+	    $('#counter').text(' you have reached the limit');
+	  } else {
+	    var char = max - len;
+	    $('#counter').text(char + ' Characters Left');
+	  }
 	});
 	/*function Empty(){
 		return ($("#username")=="" && $("password1") == "");

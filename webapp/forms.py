@@ -26,6 +26,8 @@ class RegistrationForm(UserCreationForm):
 	#date_of_birth = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
 	profile_picture = forms.ImageField()
 	profile_picture.widget.attrs.update({'class': 'custom-file-input','id':'customFile'})
+	cover_picture = forms.ImageField()
+	cover_picture.widget.attrs.update({'class': 'custom-file-input','id':'customCover'})
 	#cover_picture = forms.ImageField(required=False)
 	#cover_picture.widget.attrs.update({'class': 'custom-file-input','id':'coverPicture'})
 	interests = forms.CharField(widget=forms.TextInput(attrs={
@@ -45,7 +47,7 @@ class RegistrationForm(UserCreationForm):
 	biography = forms.CharField(required=False,widget=forms.TextInput(attrs={
 			'class':'form-control',
 			'id' : 'biography_area',
-			'placeholder':"Write a short biography about you"
+			'placeholder':"A short biography. (max 130 chars)"
 			}))
 
 	class Meta:
@@ -57,7 +59,7 @@ class RegistrationForm(UserCreationForm):
 			'email',
 			#'date_of_birth',
 			'profile_picture',
-			#'cover_picture',
+			'cover_picture',
 			'interests',
 			'biography',
 			'password1',
