@@ -10,9 +10,12 @@
       text-align: center;
       border-radius: 0px;
       background-color: #192530;
+      position: relative;
     }
     .avatar_content{
-      margin-top: 10px;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
     }
     body{
       background-color: #3a4b5b;
@@ -20,30 +23,80 @@
       /*font-family: Open-Sans;*/
       font-family: Helvetica;
     }
-    
+    .biography_container{
+      display: none;
+    }
+    .biography{
+       color: white;
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .view_profile{
+      color: red;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: .5s ease;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+    .avatar_profile:hover .overlay{
+      opacity: 1;
+    }
+    .corazon{
+      font-size: 30px;
+      color: white;
+    }
+    .corazon:hover{
+      font-size: 45px;
+      color: #d11b2d;
+      transition: .5s ease;
+    }
   </style>
 </head>
 {%endblock%}
 {% block body%}
 <div class="container">
-	<h2>Recommended users</h2>
-
+  <br><br>
+	<h2>Recommended Users</h2>
+  <p>Based on your hobbies and biography</p>
+<br><br>
 
   <div class="card-columns">
     {% for user,percentage in similarities.items %}
-    <div class="card avatar_profile">
+      <div class="card avatar_profile">
       <div class="avatar_content">
               <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
            <div id="username_and_percentage">
-            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
-            <p id="percentage">{{percentage}}% Similar</p>
+            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}:</a></h4>
+            <p id="percentage"><strong>{{percentage}}%</strong> Similar</p>
           </div>
-            <p class="biography">{{user.userprofile.biography}}</p>
             <!-- CONSIDERAR QUITARLO O DEJARLO
               <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
-           </div>
+      </div>
+      <a href="{% url 'webapp:me_with_username' username=user.username %}">
+        <div class="overlay">
+              <div class="biography">
+                <p>{{user.userprofile.biography}}</p>
+               <p class="corazon">&#10084;</p>
+              </div>
+      </div>
+      </a>
     </div>
+    
     {%endfor%}
   </div>
 
@@ -71,9 +124,9 @@
 <script type="text/javascript">
   
   $( ".avatar_profile" ).each(function( index ) {
-      var biography = $(this).find(".biography").text();
+      var biography = $(this).find(".biography").find("p").text();
       if(biography.length <= 50){
-        $(this).css('height','300px');
+        $(this).css('height','310px');
       }
       else if(biography.length > 50 && biography.length <= 120){
         $(this).css('height','350px');
@@ -82,6 +135,9 @@
         $(this).css('height','400px');
       }
       //console.log( index + ": " + $( this ).text() );
+  });
+  $(".corazon").click(function(){
+    alert("added to favorie");
   });
 </script>
 {% endblock%}
