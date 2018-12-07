@@ -5,6 +5,7 @@ Meet people based on similarities with you.
 
 * python 3.7
 * django 2.1.2 
+* Dandelion API
 
 # Instalation 
 
@@ -22,13 +23,32 @@ If your already have python3 pip & virtualenv installed on your computer you can
 
 Then create a virtual environment
 ```virtualenv --system-site-packages -p python3 ./env```
-Then activate .env
+Finally activate .env
 source ./env/bin/activate
 
 Once is activated you can install django as usual
 
 ```pip install django```
 
+# API Usage
+
+Programming text similarities from scratch can be though, so I used Dandelion API for making text similarities between users (Biographies). 
+You can get a free account from here https://dandelion.eu/. 
+Queries can be made pretty easy, as explained in the web page from above. An example of text similarity usage
+in this project is the one from above. 
+
+```
+token = "<YOUR_TOKEN_HERE>"
+url = "https://api.dandelion.eu/datatxt/sim/v1/"
+texto1 = actual_user.userprofile.biography
+texto2 = user.userprofile.biography
+dict_data = {"text1": texto1, "text2" : texto2,"lang" : "en", "token" : token}
+dict_data = json.dumps(dict_data)
+loaded_r = json.loads(dict_data)
+r = requests.post(url, data=loaded_r)
+return (r.json()['similarity'])``` 
+
+Have fun making some queries.
 
 # Screenshots
 
