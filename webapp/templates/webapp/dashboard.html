@@ -16,6 +16,7 @@
       margin: 0px;
       border: 0px;
     }
+    
     .avatar_content{
       position: relative;
       top: 50%;
@@ -30,6 +31,9 @@
     }
     .biography_container{
       display: none;
+    }
+    .rounded-circle{
+      border: 1px solid black;
     }
     .biography{
        color: white;
@@ -60,6 +64,7 @@
     }
     .avatar_profile:hover .overlay{
       opacity: 1;
+      filter: blur(0px);
     }
     .corazon{
       font-size: 30px;
@@ -73,7 +78,21 @@
       color: #d11b2d;
       transition: .5s ease;
     }
-    
+    .background_container{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 33%;
+      /*background: url("{% static 'webapp/register_bg.jpg'%}") no-repeat center center;*/
+      background-color: black;
+      filter: blur(1.5px);
+    }
+    .cover_picture{
+      width: 100%;
+      height: 100%;
+
+    }
   </style>
 </head>
 {%endblock%}
@@ -87,12 +106,17 @@
   <div class="card-columns">
     {% for user,percentage in similarities.items %}
       <div class="card avatar_profile">
+        <div class="background_container">
+          <img class="cover_picture" src="{% static 'webapp/register_bg.jpg'%}">
+        </div>
       <div class="avatar_content">
+       
               <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
+               
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
            <div id="username_and_percentage">
             <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}" style="color: #124b84;">@{{user.username}}:</a></h4>
-            <p id="percentage"><strong>{{percentage}}%</strong> Similar</p>
+            <p id="percentage"><strong>{{percentage}}%</strong> Coincidence</p>
           </div>
             <!-- CONSIDERAR QUITARLO O DEJARLO
               <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
@@ -111,26 +135,6 @@
     
     {%endfor%}
   </div>
-
-
-
-	<!--<div class="row">
-         {% for user,percentage in similarities.items %}
-          <div class="col-sm-3" id="avatar_profile">
-           <div id="avatar_content">
-              <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
-            <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
-           <div id="username_and_percentage">
-            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
-            <p id="percentage">{{percentage}}% Similar</p>
-          </div>
-            <p>{{user.userprofile.biography}}</p>
-            CONSIDERAR QUITARLO O DEJARLO
-              <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> 
-           </div>
-          </div>
-         {% endfor %}
-    </div>-->
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script type="text/javascript">
