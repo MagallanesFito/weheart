@@ -35,7 +35,7 @@ def jaccard_similarity(actual_user,user):
 	return float("{0:.2f}".format(similarity)) 
 	#return randint(50,100)
 def semantic_similarity(actual_user,user):
-	'''token = ""
+	'''token = "<YOUR_TOKEN_HERE>"
 	url = "https://api.dandelion.eu/datatxt/sim/v1/"
 	texto1 = actual_user.userprofile.biography
 	texto2 = user.userprofile.biography

@@ -1,22 +1,87 @@
 {% extends 'base.html'%}
 {% load static%}
+
+{%block head%}
+<head>
+  <title>Dashboard</title>
+  <style type="text/css">
+    .avatar_profile{
+      /*height: 400px;*/
+      text-align: center;
+      border-radius: 0px;
+      background-color: #192530;
+    }
+    .avatar_content{
+      margin-top: 10px;
+    }
+    body{
+      background-color: #3a4b5b;
+      color: white;
+      /*font-family: Open-Sans;*/
+      font-family: Helvetica;
+    }
+    
+  </style>
+</head>
+{%endblock%}
 {% block body%}
 <div class="container">
 	<h2>Recommended users</h2>
-	<div class="row">
+
+
+  <div class="card-columns">
+    {% for user,percentage in similarities.items %}
+    <div class="card avatar_profile">
+      <div class="avatar_content">
+              <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
+            <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
+           <div id="username_and_percentage">
+            <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
+            <p id="percentage">{{percentage}}% Similar</p>
+          </div>
+            <p class="biography">{{user.userprofile.biography}}</p>
+            <!-- CONSIDERAR QUITARLO O DEJARLO
+              <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
+           </div>
+    </div>
+    {%endfor%}
+  </div>
+
+
+
+	<!--<div class="row">
          {% for user,percentage in similarities.items %}
-          <div class="col-sm-3">
-            <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
+          <div class="col-sm-3" id="avatar_profile">
+           <div id="avatar_content">
+              <a href="{% url 'webapp:me_with_username' username=user.username %}"><img class="rounded-circle" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140"></a>
             <h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
            <div id="username_and_percentage">
             <h4 id="user_username"><a href="{% url 'webapp:me_with_username' username=user.username %}">@{{user.username}}</a></h4>
             <p id="percentage">{{percentage}}% Similar</p>
           </div>
             <p>{{user.userprofile.biography}}</p>
-            <!-- CONSIDERAR QUITARLO O DEJARLO
-              <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> -->
-          </div><!-- /.col-lg-4 -->
+            CONSIDERAR QUITARLO O DEJARLO
+              <p><a class="btn btn-secondary" href="{% url 'webapp:me_with_username' username=user.username %}" role="button">View profile</a></p> 
+           </div>
+          </div>
          {% endfor %}
-    </div>
+    </div>-->
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  
+  $( ".avatar_profile" ).each(function( index ) {
+      var biography = $(this).find(".biography").text();
+      if(biography.length <= 50){
+        $(this).css('height','300px');
+      }
+      else if(biography.length > 50 && biography.length <= 120){
+        $(this).css('height','350px');
+      }
+      else {//(biography.length > 120 && biography.length<160){
+        $(this).css('height','400px');
+      }
+      //console.log( index + ": " + $( this ).text() );
+  });
+</script>
 {% endblock%}
