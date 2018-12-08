@@ -24,7 +24,7 @@ If your already have python3 pip & virtualenv installed on your computer you can
 Then create a virtual environment
 ```virtualenv --system-site-packages -p python3 ./env```
 Finally activate .env
-source ./env/bin/activate
+```source ./env/bin/activate```
 
 Once is activated you can install django as usual
 
