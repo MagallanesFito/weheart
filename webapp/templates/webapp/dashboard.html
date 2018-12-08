@@ -78,6 +78,9 @@
       color: #d11b2d;
       transition: .5s ease;
     }
+    .profile_link:hover{
+      color: #29b7f4;
+    }
     .background_container{
       position: absolute;
       top: 0;
@@ -126,7 +129,8 @@
               <div class="biography">
                 <p>{{user.userprofile.biography}}</p>
                <div>
-                 <a class="corazon" href="#">&#10084;</a>
+                 <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+                 <a class="corazon profile_link" href="{% url 'webapp:me_with_username' username=user.username %}"><span title="Go to Profile"><i class="fas fa-user-alt"></i></span></a>
                </div>
               </div>
       </div>
@@ -152,9 +156,9 @@
       }
       //console.log( index + ": " + $( this ).text() );
   });
-  $(".corazon").click(function(){
+  /*$(".corazon").click(function(){
     alert("added to favorie");
-  });
+  });*/
   $(".overlay").each(function(index){
     randomRed = (Math.floor(Math.random() * 255));
     randomGreen = (Math.floor(Math.random() * 255));

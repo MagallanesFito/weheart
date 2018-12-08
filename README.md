@@ -38,7 +38,7 @@ Queries can be made pretty easy, as explained in the web page from above. An exa
 in this project is the one from above. 
 
 ```
-token = "<YOUR_TOKEN_HERE>"
+token = <YOUR_TOKEN_HERE>
 url = "https://api.dandelion.eu/datatxt/sim/v1/"
 texto1 = actual_user.userprofile.biography
 texto2 = user.userprofile.biography
@@ -46,7 +46,8 @@ dict_data = {"text1": texto1, "text2" : texto2,"lang" : "en", "token" : token}
 dict_data = json.dumps(dict_data)
 loaded_r = json.loads(dict_data)
 r = requests.post(url, data=loaded_r)
-return (r.json()['similarity'])``` 
+return (r.json()['similarity'])
+``` 
 
 Have fun making some queries.
 
