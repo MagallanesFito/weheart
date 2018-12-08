@@ -1,17 +1,46 @@
 {% extends 'base.html'%}
 
-{% block body%}
-<div class="container">
-		<h2>{{user.first_name|add:" "|add:user.last_name}}</h2>
-	<h4 id="user_username">@{{user.username}}</h4>
-	<h4><strong>Biography:</strong></h4>
-	<p>{{user.userprofile.biography}}</p>
-	<h4><strong>Interests:</strong></h4>
-	<ul>
-		{% for interest in user_interests%}
-		<li><p>{{interest}}</p></li>
-		{% endfor%}
-	</ul>
-
+{%block body%}
+<div class="profile-page" style="background-color: #313f54;">
+        
+    <div class="page-header header-filter" data-parallax="true" style="background-image:url('{{user.userprofile.cover_picture.url}}');"></div>
+      <div class="main main-raised">
+		<div class="profile-content">
+            <div class="container">
+                <div class="row">
+	                <div class="col-md-6 ml-auto mr-auto">
+        	           <div class="profile">
+	                        <div class="avatar">
+	                            <!--<img style="border: 2px solid white;" src="{{user.userprofile.profile_picture.url}}" class="img-raised rounded-circle img-fluid" width="350" height="350">-->
+	                            <img class="rounded-circle2" src="{{user.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="140" height="140">
+	                        </div>
+	                        <div class="name">
+	                        	<h3 class="title">{{user.first_name|add:" "|add:user.last_name}}</h3>
+	                        	<h5>Interests</h5>
+								<p>{{user.userprofile.interests}}</p>
+								 <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+                                <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+                                <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+	                        </div>
+	                    </div>
+    	            </div>
+                </div>
+                <div class="description text-center">
+                    <p>{{user.userprofile.biography}}</p>
+                </div>
+				<div class="row">
+					<div class="col-md-6 ml-auto mr-auto">
+                        <div class="profile-tabs">
+                          
+                        </div>
+    	    	</div>
+            </div>
+            </div>
+        </div>
+	</div>
+    <footer class="footer text-center ">
+        <p style="display: inline;">weHeart 2018</p>
+    </footer>
 </div>
 {% endblock%}
+

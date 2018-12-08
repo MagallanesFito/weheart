@@ -1,0 +1,176 @@
+html *{
+    -webkit-font-smoothing: antialiased;
+}
+.navbar {
+    border: 0;
+    border-radius: 3px;
+    padding: .625rem 0;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 50px !important;
+    background-color: #313f54!important;
+    box-shadow: 0 4px 18px 0 rgba(0,0,0,.12), 0 7px 10px -5px rgba(0,0,0,.15) !important;
+    z-index: 1000 !important;    
+}
+.navbar-brand:hover {
+    font-size: 30px !important;
+     transition: .5s ease;
+
+}
+
+
+
+.navbar .navbar-nav .nav-item .nav-link .fa, .navbar .navbar-nav .nav-item .nav-link .material-icons {
+    font-size: 1.25rem;
+    max-width: 24px;
+    margin-top: -1.1em;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    position: relative;
+    color: inherit;
+    padding: .9375rem;
+    font-weight: 400;
+    font-size: 12px;
+    border-radius: 3px;
+    line-height: 20px;
+}
+
+
+
+.profile-page .page-header {
+    height: 380px;
+    background-position:center;
+}
+
+.page-header {
+    height: 100vh;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-filter:after, .header-filter:before {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+}
+
+.header-filter::before {
+    background: rgba(0,0,0,.5);
+}
+
+
+
+.main {
+    background: #FFF;
+    position: relative;
+    z-index: 3;
+}
+
+.profile-page .profile {
+    text-align: center;
+}
+
+.profile-page .profile img {
+    max-width: 160px;
+    max-height: 160px;
+    width: 100%;
+    margin: 0 auto;
+    -webkit-transform: translate3d(0,-50%,0);
+    -moz-transform: translate3d(0,-50%,0);
+    -o-transform: translate3d(0,-50%,0);
+    -ms-transform: translate3d(0,-50%,0);
+    transform: translate3d(0,-50%,0);
+}
+
+.img-raised {
+    box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.rounded-circle2{
+    border-radius: 50%!important;
+      border: 2px solid white;
+}
+.title {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+    color: #3C4858;
+    font-weight: 700;
+    font-family: Helvetica,"Times New Roman",serif;
+}
+
+.profile-page .description {
+    font-family: Helvetica;
+    font-style: italic;
+    margin: 1.071rem auto 0;
+    max-width: 600px;
+    color: #999;
+    font-weight: 300;
+}
+
+p {
+    font-size: 14px;
+    margin: 0 0 10px;
+}
+.profile-page .profile .name{
+    margin-top: -80px;
+}
+/* dropdown */
+.dropdown-menu.show{
+    transition: .5s ease;
+}
+.dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover, .dropdown-menu a:active, .dropdown-menu a:focus, .dropdown-menu a:hover {
+    
+    background-color: #68696b;
+    color: white;
+}
+.dropdown-menu .dropdown-item, .dropdown-menu li>a {
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-flow: nowrap;
+    align-items: center;
+    color: #333;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: .8125rem;
+    border-radius: .125rem;
+    margin: 0 .3125rem;
+    transition: all .15s linear;
+    min-width: 7rem;
+    padding: 0.625rem 1.25rem;
+    min-height: 1rem !important;
+    overflow: hidden;
+    line-height: 1.428571;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+/* footer */
+
+footer{
+    margin-top: 10px;
+    color: white;
+    padding: 25px;
+    font-weight: 300;
+    
+}
+.footer p{
+    margin-bottom: 0;
+    font-size: 16px;
+    margin: 0 0 10px;
+    font-weight: 300;
+    font-family: Helvetica;
+}
