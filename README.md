@@ -61,5 +61,8 @@ Image Source "https://www.freepik.es/fotos-vectores-gratis/musica"
 ![Register screen](register.png)
 Image Soruce "https://www.freepik.es/fotos-vectores-gratis/fondo"
 
-Dashboard (not finished):
+Dashboard
 ![Login screen](dashboard.png)
+
+Profile page
+![Login screen](profile.png)
