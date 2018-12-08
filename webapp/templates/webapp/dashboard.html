@@ -37,7 +37,7 @@
     }
     .biography{
        color: white;
-      font-size: 20px;
+      font-size: 25px;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -89,6 +89,7 @@
       width: 100%;
       height: 33%;
       /*background: url("{% static 'webapp/register_bg.jpg'%}") no-repeat center center;*/
+      
       background-color: black;
       filter: blur(1.5px);
     }
@@ -167,10 +168,6 @@
     randomRed = (Math.floor(Math.random() * 255));
     randomGreen = (Math.floor(Math.random() * 255));
     randomBlue = (Math.floor(Math.random() * 255));
-    console.log(randomRed);
-    console.log(randomGreen);
-    console.log(randomBlue);
-    console.log("------------");
     var atribute = "rgba("+randomRed.toString()+","+randomGreen.toString()+","+randomBlue.toString()+",0.8)";
     $(this).css('background-color',atribute);
   });

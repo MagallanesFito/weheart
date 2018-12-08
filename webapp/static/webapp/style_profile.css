@@ -117,7 +117,7 @@ html *{
     font-style: italic;
     margin: 1.071rem auto 0;
     max-width: 600px;
-    color: #999;
+    color: #3C4858;
     font-weight: 300;
 }
 
@@ -173,4 +173,26 @@ footer{
     margin: 0 0 10px;
     font-weight: 300;
     font-family: Helvetica;
+}
+.corazon_not_liked{
+   font-size: 40px;
+   color: #bc1642;
+}
+.corazon:link{
+    text-decoration: none;
+}
+.corazon_not_liked:hover{
+    font-size: 50px;
+    transition: .5s ease;
+    color: #bc1642;
+}
+.no_like{
+    color: #23428e;
+}
+.no_like:hover{
+    color: #23428e;
+}
+.badge-custom {
+    color: #fff;
+    background-color: red;
 }

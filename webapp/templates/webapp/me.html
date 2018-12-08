@@ -16,18 +16,25 @@
 	                        </div>
 	                        <div class="name">
 	                        	<h3 class="title">{{user.first_name|add:" "|add:user.last_name}}</h3>
-	                        	<h5>Interests</h5>
-								<p>{{user.userprofile.interests}}</p>
-								 <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
-                                <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
-                                <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+	                        	<h4 style="font-family: Helvetica;">Interests</h4>
+	                        	{% for interest in user_interests%}
+	                        	<span class='badge badge-custom partial_badge'>{{interest}}</span>
+	                        	{% endfor%}
+								
+								<div>
+				                 <a class="corazon_not_liked" href="#"><span title="Like"><i class="far fa-heart"></i></span></a>
+				                 <a class="corazon_not_liked no_like" href="#"><span title="Don't Like"><i class="fas fa-times-circle"></i></span></a>
+				             
+				             
+				               </div>
 	                        </div>
 	                    </div>
     	            </div>
                 </div>
                 <div class="description text-center">
+                	<h4>Biography</h4>
                     <p>{{user.userprofile.biography}}</p>
-                </div>
+                </div><br><br>
 				<div class="row">
 					<div class="col-md-6 ml-auto mr-auto">
                         <div class="profile-tabs">
@@ -42,5 +49,15 @@
         <p style="display: inline;">weHeart 2018</p>
     </footer>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(".badge-custom").each(function(index){
+    randomRed = (Math.floor(Math.random() * 255));
+    randomGreen = (Math.floor(Math.random() * 255));
+    randomBlue = (Math.floor(Math.random() * 255));
+    var atribute = "rgba("+randomRed.toString()+","+randomGreen.toString()+","+randomBlue.toString()+",0.8)";
+    $(this).css('background-color',atribute);
+  });
+</script>
 {% endblock%}
 
