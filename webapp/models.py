@@ -41,5 +41,9 @@ class Liked(models.Model):
 
 	@classmethod
 	def like_profile(cls,current_user,new_user):
-		friend,created  = cls.objects.get_or_create(current_user=current_user)
+		friend,created = cls.objects.get_or_create(current_user=current_user)
 		friend.users.add(new_user)
+	@classmethod
+	def dislike_profile(cls,current_user,new_user):
+		friend,created = cls.objects.get_or_create(current_user=current_user)
+		friend.users.remove(new_user)

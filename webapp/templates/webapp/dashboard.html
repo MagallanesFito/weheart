@@ -71,6 +71,9 @@
       font-size: 30px;
       color: white;
     }
+    .corazon_filled{
+      color: #d11b2d !important;
+    }
     .corazon:link{
       text-decoration: none;
     }
@@ -132,7 +135,11 @@
               <div class="biography">
                 <p>{{user.userprofile.biography}}</p>
                <div>
-                 <a class="corazon" href="{% url 'webapp:like_profile' operation='add' pk=user.pk source='dashboard' destination=None%}"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+                 {% if user in friends%}
+                 <a class="corazon corazon_filled" href="{% url 'webapp:like_profile' operation='remove' pk=user.pk source='dashboard' destination=None%}"><span title="You like this user"><i class="fa fa-heart"></i></span></a>
+                 {% else%}
+                 <a class="corazon" href="{% url 'webapp:like_profile' operation='add' pk=user.pk source='dashboard' destination=None%}"><span title="Like this user"><i class="fas fa-heart"></i></span></a>
+                 {% endif%}
                  <a class="corazon profile_link" href="{% url 'webapp:me_with_username' username=user.username %}"><span title="Go to Profile"><i class="fas fa-user-alt"></i></span></a>
                </div>
               </div>

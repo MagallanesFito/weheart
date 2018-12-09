@@ -23,8 +23,12 @@
 								
 								{% if request.user != user%}
 								<div>
-				                 <a class="corazon_not_liked" href="{% url 'webapp:like_profile' operation='add' pk=user.pk source='me_with_username' destination=user.username%}"><span title="Like"><i class="far fa-heart"></i></span></a>
-				                 <a class="corazon_not_liked no_like" href="#"><span title="Don't Like"><i class="fas fa-times-circle"></i></span></a>
+									 {% if is_friend%}
+				                 <a class="corazon_not_liked corazon_filled" href="{% url 'webapp:like_profile' operation='remove' pk=user.pk source='me_with_username' destination=user.username%}"><span title="You like this user"><i class="fas fa-heart"></i></span></a>
+				                 {% else%}
+				                 <a style="color: #a8a8a8;" class="corazon_not_liked" href="{% url 'webapp:like_profile' operation='add' pk=user.pk source='me_with_username' destination=user.username%}"><span title="Like this user"><i class="far fa-heart"></i></span></a>
+				                
+				                 {% endif%}
 				               </div>
 				               {% endif%}
 	                        </div>

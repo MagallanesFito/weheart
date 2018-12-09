@@ -176,7 +176,10 @@ footer{
 }
 .corazon_not_liked{
    font-size: 40px;
-   color: #bc1642;
+   color: black;
+}
+.corazon_filled{
+      color: #d11b2d;
 }
 .corazon:link{
     text-decoration: none;
@@ -184,13 +187,7 @@ footer{
 .corazon_not_liked:hover{
     font-size: 50px;
     transition: .5s ease;
-    color: #bc1642;
-}
-.no_like{
-    color: #23428e;
-}
-.no_like:hover{
-    color: #23428e;
+    color: #d11b2d;
 }
 .badge-custom {
     color: #fff;

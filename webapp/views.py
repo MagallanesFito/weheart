@@ -58,6 +58,12 @@ def calculate_similarity(actual_user,user):
 def dashboard(request):
 	#users = User.objects.all()
 	users = User.objects.exclude(pk=request.user.pk)
+
+	try:
+		friend = Liked.objects.get(current_user=request.user)
+		friends = friend.users.all()
+	except Liked.DoesNotExist:
+		friends = []
 	#actualizar este codigo mas tarde
 	similarities = {}
 	actual_user = request.user
@@ -66,7 +72,7 @@ def dashboard(request):
 		#if user != request.user:
 		similarities[user] = calculate_similarity(actual_user,user)
 	ordenado = dict(sorted(similarities.items(),key=lambda kv : kv[1],reverse=True))
-	return render(request,'webapp/dashboard.html',{'similarities' : ordenado})
+	return render(request,'webapp/dashboard.html',{'similarities' : ordenado,'friends':friends})
 def register(request):
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST,request.FILES)
@@ -99,15 +105,30 @@ def me(request,username=None):
 	else:
 		user = request.user
 	separate_interests = user.userprofile.interests.split(",")[:-1]
-
+	is_friend = False
+	local_friends = None
+	#Likes del perfil que se visita
 	try:
 	    friend = Liked.objects.get(current_user=user)
 	    friends = friend.users.all()
 	except Liked.DoesNotExist:
 	    friends = []
+	#Likes del perfil visitante
+	if user != request.user:
+		try:
+			local_friend = Liked.objects.get(current_user=request.user)
+			try:
+				local_friends = local_friend.users.get(username=user.username)
+			except User.DoesNotExist:
+				local_friends = None
+		except Liked.DoesNotExist:
+			local_friends = None
+	if local_friends != None:
+		is_friend = True
 	args = {'user':user,
 	'user_interests':separate_interests,
-	'friends' : friends}
+	'friends' : friends,
+	'is_friend':is_friend}
 	return render(request,'webapp/me.html',args)
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')
@@ -115,8 +136,10 @@ def config_profile(request):
 	return render(request,'webapp/config_profile.html')
 def like_profile(request,operation,pk,source,destination):
 	new_friend = User.objects.get(pk=pk)
-	#por el momento solo agregar amigos
-	Liked.like_profile(request.user,new_friend)
+	if operation=='add':
+		Liked.like_profile(request.user,new_friend)
+	elif operation=='remove':
+		Liked.dislike_profile(request.user,new_friend)
 	if source=='me_with_username':
 		return redirect('webapp:me_with_username',username=destination)
 	elif source == 'dashboard':
