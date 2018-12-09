@@ -38,10 +38,26 @@
                 <div class="description text-center">
                 	<h4>Biography</h4>
                     <p>{{user.userprofile.biography}}</p>
-                </div><br><br>
-                {% for usuario in friends%}
-                <a href="#">{{usuario.username}}</a>
-                {% endfor%}
+                </div>
+
+                <div class="description text-center">
+                	<h4>Likes</h4>
+                <div class="row">
+                	{% for usuario in friends%}
+                	<div class="col-md-2">
+                		 
+                		 	<a href="{% url 'webapp:me_with_username' username=usuario.username %}"><img class="rounded-circle2" src="{{usuario.userprofile.profile_picture.url}}" alt="Generic placeholder image" width="100" height="100"></a>
+                		
+                		 
+                	</div>
+                	{% endfor%}
+                </div>
+                	{% if not friends%}
+                	<h5><i>No Likes yet</i></h5>
+                	{%endif%}
+                </div>
+                <br><br>
+
 				<!--<div class="row">
 					<div class="col-md-6 ml-auto mr-auto">
                         <div class="profile-tabs">

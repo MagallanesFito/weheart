@@ -1,0 +1,21 @@
+.overlay_circle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transition: .5s ease;
+      background-color: rgba(0, 0, 0, 0.75);
+      border: 1px solid white;
+      border-radius: 5px;
+    }
+.profile_like_container:hover .overlay_circle{
+      opacity: 1;
+      filter: blur(0px);
+}
+.user_names{
+  font-size: 12px;
+}
