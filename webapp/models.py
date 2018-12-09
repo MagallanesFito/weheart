@@ -34,3 +34,12 @@ def update_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
     instance.userprofile.save() #Esto tiene que estar en minusculas para que el form lo reconozca
+
+class Liked(models.Model):
+	users = models.ManyToManyField(User)
+	current_user = models.ForeignKey(User,related_name='owner',null=True,on_delete=models.CASCADE)
+
+	@classmethod
+	def like_profile(cls,current_user,new_user):
+		friend,created  = cls.objects.get_or_create(current_user=current_user)
+		friend.users.add(new_user)

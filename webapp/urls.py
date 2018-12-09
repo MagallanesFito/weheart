@@ -16,4 +16,5 @@ urlpatterns = [
 	path('me/<str:username>',views.me,name="me_with_username"),
 	path('edit/',views.edit_profile,name="edit_profile"),
 	path('config/',views.config_profile,name="config_profile"),
+	path('connect/<str:operation>/<int:pk>/<str:source>/<str:destination>',views.like_profile,name="like_profile")
 ]

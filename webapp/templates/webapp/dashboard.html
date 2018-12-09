@@ -89,9 +89,10 @@
       width: 100%;
       height: 33%;
       /*background: url("{% static 'webapp/register_bg.jpg'%}") no-repeat center center;*/
+      border: 2px solid #a3a3a3;
       
       background-color: black;
-      filter: blur(1.5px);
+      
     }
     .cover_picture{
       width: 100%;
@@ -131,7 +132,7 @@
               <div class="biography">
                 <p>{{user.userprofile.biography}}</p>
                <div>
-                 <a class="corazon" href="#"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
+                 <a class="corazon" href="{% url 'webapp:like_profile' operation='add' pk=user.pk source='dashboard' destination=None%}"><span title="Like this profile"><i class="fas fa-heart"></i></span></a>
                  <a class="corazon profile_link" href="{% url 'webapp:me_with_username' username=user.username %}"><span title="Go to Profile"><i class="fas fa-user-alt"></i></span></a>
                </div>
               </div>

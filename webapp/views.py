@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from webapp.forms import RegistrationForm
 from django.contrib.auth.models import User 
 import random
-from webapp.models import Interest
+from webapp.models import Interest,Liked
 import requests
 import json
 
@@ -99,8 +99,25 @@ def me(request,username=None):
 	else:
 		user = request.user
 	separate_interests = user.userprofile.interests.split(",")[:-1]
-	return render(request,'webapp/me.html',{'user':user,'user_interests':separate_interests})
+
+	try:
+	    friend = Liked.objects.get(current_user=user)
+	    friends = friend.users.all()
+	except Liked.DoesNotExist:
+	    friends = []
+	args = {'user':user,
+	'user_interests':separate_interests,
+	'friends' : friends}
+	return render(request,'webapp/me.html',args)
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')
 def config_profile(request):
 	return render(request,'webapp/config_profile.html')
+def like_profile(request,operation,pk,source,destination):
+	new_friend = User.objects.get(pk=pk)
+	#por el momento solo agregar amigos
+	Liked.like_profile(request.user,new_friend)
+	if source=='me_with_username':
+		return redirect('webapp:me_with_username',username=destination)
+	elif source == 'dashboard':
+		return redirect('webapp:dashboard')
