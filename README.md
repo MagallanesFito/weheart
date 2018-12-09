@@ -1,5 +1,5 @@
 # weheart
-Meet people based on similarities with you.
+weHeart is a web application that allows you to meet people similar to you. The similarity is based on the combination between the calculation of two biography similarities (yours and other's people) and the interests similarity.
 
 # Dependencies 
 
