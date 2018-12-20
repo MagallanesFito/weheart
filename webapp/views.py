@@ -6,7 +6,7 @@ import random
 from webapp.models import Interest,Liked
 import requests
 import json
-
+from django.contrib.auth.decorators import login_required
 
 ''' Calcular la funcion de similitud, por lo pronto será un numero aleatorio. 
 Mas tarde se opta por una funcion mas sofisticada. Esta debe tomar las preferencias de
@@ -54,7 +54,7 @@ def calculate_similarity(actual_user,user):
 	resultado = (0.3*result_jaccard+0.7*result_semantic)*100
 	return float("{0:.2f}".format(resultado))  
 	
-
+@login_required
 def dashboard(request):
 	#users = User.objects.all()
 	users = User.objects.exclude(pk=request.user.pk)
@@ -99,6 +99,7 @@ def register(request):
 			list_interests.append(element.name)
 		args = {'form':form,'list_interests':list_interests}
 		return render(request,'webapp/register.html',args)
+@login_required
 def me(request,username=None):
 	if username:
 		user = User.objects.get(username=username)
@@ -130,10 +131,13 @@ def me(request,username=None):
 	'friends' : friends,
 	'is_friend':is_friend}
 	return render(request,'webapp/me.html',args)
+@login_required
 def edit_profile(request):
 	return render(request,'webapp/edit_profile.html')
+@login_required
 def config_profile(request):
 	return render(request,'webapp/config_profile.html')
+@login_required
 def like_profile(request,operation,pk,source,destination):
 	new_friend = User.objects.get(pk=pk)
 	if operation=='add':

@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'weheart.middleware.LoginRequired'
 ]
 
 ROOT_URLCONF = 'weheart.urls'
@@ -120,7 +121,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+LOGIN_URL = '/webapp/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'weheart/media')
 LOGIN_REDIRECT_URL = '/webapp/dashboard'
 LOGOUT_REDIRECT_URL = '/webapp/'
+
+'''LOGIN_EXEMPT_URLS = (
+    r'webapp/logout$',
+    r'webapp/$',
+)'''
 
