@@ -74,6 +74,8 @@ def dashboard(request):
 	ordenado = dict(sorted(similarities.items(),key=lambda kv : kv[1],reverse=True))
 	return render(request,'webapp/dashboard.html',{'similarities' : ordenado,'friends':friends})
 def register(request):
+	if user.is_authenticated:
+	 	return redirect('/webapp/dashboard')
 	if request.method == 'POST':
 		form = RegistrationForm(request.POST,request.FILES)
 		#print("*"*10)
